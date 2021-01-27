@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Registration List</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <style>
+            body { 
+                background-color: #ede7f6;
+            }
+            h1 {
+                font-weight: bold;
+            }
+            h2 {
+                font-weight: bold;
+            }
+            
+            @media (min-width: 768px) {  
+                  h1 {font-size:3rem;}
+                  h2 {font-size:2.25rem;}
+                  h3 {font-size:2rem;}
+                  h4 {font-size:1.5rem;}
+                  h5 {font-size:1.3rem;}
+                  body {font-size: 1.25rem;}
+            }
+          </style>
+        
+    </head>
+    <body>
+        <br>
+        <div class="w3-container">
+            <!-- List of registrants for chosen week -->
+            <h3><b>All registrations for: </b><b id="currentWeekDisplay"></b></h3>
+            <h5><b>Total people registered: </b><b id="numRegistered"></b></h5>
+            <div id="registrantsList"></div>
+
+            <br>
+
+            <!-- Choose different week to see list of registrants -->
+            <select id="serviceDateDropdown" class="w3-select w3-border" name="option" style="max-width: 200px;">
+                <option id="option0" value=""></option>
+                <option id="option1" value="" selected></option>
+                <option id="option2" value=""></option>
+                <option id="option3" value=""></option>
+            </select>
+            <button class="w3-button w3-blue-grey w3-round-large" style="margin-top: 5px; margin-bottom: 5px;" onclick="changeServiceDate()">Change Week</button>
+        </div>
+
+
+
+
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-firestore.js"></script>
+
+        
+        <!-- All data handling and UI -->
+        <script src="admin.js"></script>
+
+        
+
+
+
+    </body>
+</html>

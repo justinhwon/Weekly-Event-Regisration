@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Reserve a Seat for [Weekly Event]</title>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <style>
+          body { 
+                background-color: #ede7f6;
+          }
+          h1{
+            font-weight: bold;
+          }
+          h2{
+            font-weight: bold;
+          }
+          #tabButton1 {
+            font-size: 60%;
+          }
+          #tabButton2 {
+            font-size: 60%;
+          }
+          #tabButton3 {
+            font-size: 60%;
+          }
+          #mainRegCard{
+            max-width: 90%;
+          }
+          
+          
+          @media (min-width: 768px) {  
+            #tabButton1 {
+              font-size: 100%;
+            }
+            #tabButton2 {
+              font-size: 100%;
+            }
+            #tabButton3 {
+              font-size: 100%;
+            }
+            #mainRegCard {
+              max-width: 800px;
+            }
+          }
+        </style>
+        
+    </head>
+    <body>
+        
+        <br>
+        <div id="mainRegCard" class="w3-card-4 w3-margin-bottom" style="margin: auto; background-color: #FFFFFF;">
+            
+            <!-- Registration tab navigation bar -->
+            <div class="w3-bar w3-blue-grey">
+                <button class="w3-bar-item w3-button tablink w3-black" id="tabButton1" onclick="openTab(event, 'registrationTab')">Registration</button>
+                <button class="w3-bar-item w3-button tablink" id="tabButton2" onclick="openTab(event, 'checkTab')">Registration Status</button>
+                <button class="w3-bar-item w3-button tablink" id="tabButton3" onclick="openTab(event, 'cancelTab')">Cancel Registration</button>
+            </div>
+
+            <!-- Main registration tab -->
+            <div id="registrationTab" class="w3-container w3-border reg-tab">
+                <div class="w3-container">
+                    <h2>Reserve a Seat for [Weekly Event]</h2>
+                </div>
+                
+                <!-- Form for user to fill in -->
+                <div id="registrationFormTab">
+                    
+                    <div class="w3-container">
+                
+                        <label>First Name</label>
+                        <input class="w3-input w3-border w3-round" id="firstname" type="text" required>
+                        <p id="firstNameWarning" style="color:red"></p>
+                        
+                        
+    
+                        <label>Last Name</label>
+                        <input class="w3-input w3-border w3-round" id="lastname" type="text" required>
+                        <p id="lastNameWarning" style="color:red"></p>
+                        
+                        
+    
+                        <label class="description" for="date">Date of Event</label>
+                        
+    
+                        <div class="w3-container">
+    
+                            <!-- UPDATE: Actually I automatically get the next 3 Sundays now -->
+                            <input id="date1" name="date" class="w3-check" type="checkbox" value="" />
+                            <label id='datelabel1' class="choice" for="date1"></label>
+                            <br>
+                            <input id="date2" name="date" class="w3-check" type="checkbox" value="" />
+                            <label id='datelabel2' class="choice" for="date2"></label>
+                            <br>
+                            <input id="date3" name="date" class="w3-check" type="checkbox" value="" />
+                            <label id='datelabel3' class="choice" for="date3"></label>
+
+                            <p id="dateWarning" style="color:red"></p>
+    
+            
+                        </div>
+                        <br>
+    
+    
+                        <label class="description" for="agreement">I agree to adhere to the guidelines set by [Organization Name] of proper social-distancing, sanitizing, and usage of masks for safety measures. By agreeing, I acknowledge the risk of any transfer of illnesses, including COVID19, that I may be potentially exposed to by being in the proximity of other people, and will not hold [Organization Name] responsible. </label>
+    
+                        <div class="w3-container">
+                            <input id="agreement" name="agreement" class="w3-check" type="checkbox" value="checked" required/>
+                            <label class="choice" for="agreement" >I have read the agreement and I agree.</label>
+                            <p id="agreementWarning" style="color:red"></p>
+                        </div> 
+    
+                        <br>
+                        
+                        <button class="w3-button w3-blue-grey w3-round-large" onclick="submitRegistrationForm();" >Submit</button>
+                        <p id="validationMessage" style="color:red"></p>
+                        <!--
+                        <input id="saveForm" class="w3-button w3-blue-grey w3-round-large" type="submit"/>
+                        -->
+                    
+                    </div>
+                    <br>
+
+                </div>
+                
+                <!-- Notifies user of successful submit, lets you refresh form -->
+                <div id="registrationFormSubmittedTab" style="display: none">
+
+                    <div class="w3-container w3-center">
+                        <h2>Registration completed!</h3>
+                        <h5>Use other tabs above to check or cancel registration, or click below to submit another.</h5>
+                        <button class="w3-button w3-blue-grey w3-round-large" onclick="refreshRegistrationForm()">Submit New Registration</button>
+                    </div>
+                    <br>
+                    
+                    <!-- Switch back to new registration form from submitted state -->
+                    <script>
+                        function refreshRegistrationForm(){
+
+                            // switch tab from submitted to registration form
+                            var currTab, newTab;
+                            currTab = document.getElementById("registrationFormSubmittedTab");
+                            newTab = document.getElementById("registrationFormTab");
+                            currTab.style.display = "none";
+                            newTab.style.display = "block";
+
+                            // reset all input fields and warnings
+                            document.getElementById("firstname").value = "";
+                            document.getElementById("firstNameWarning").innerHTML = "";
+                            document.getElementById("lastname").value = "";
+                            document.getElementById("lastNameWarning").innerHTML = "";
+                            document.getElementById("date1").checked = false;
+                            document.getElementById("date2").checked = false;
+                            document.getElementById("date3").checked = false;
+                            document.getElementById("dateWarning").innerHTML = "";
+                            document.getElementById("agreement").checked = false;
+                            document.getElementById("agreementWarning").innerHTML = "";
+                            document.getElementById("validationMessage").innerHTML = "";
+                        }
+                    </script>
+
+                </div>
+                
+            </div>
+
+            <!-- Check registration tab -->
+            <div id="checkTab" class="w3-container w3-border reg-tab" style="display:none">
+                <div class="w3-container">
+                    <h2>Check Registration Status</h2>
+                </div>
+
+
+                <!-- Form for user to fill in -->
+                <div id="checkRegistrationTab">
+                    
+                    <div class="w3-container">
+                
+                        <label>First Name</label>
+                        <input class="w3-input w3-border w3-round" id="firstnameCheck" type="text" required>
+                        <p id="firstNameCheckWarning" style="color:red"></p>
+                        <br>
+    
+                        <label>Last Name</label>
+                        <input class="w3-input w3-border w3-round" id="lastnameCheck" type="text" required>
+                        <p id="lastNameCheckWarning" style="color:red"></p>
+                        <br>
+                        
+                        <button class="w3-button w3-blue-grey w3-round-large" onclick="submitCheckForm();" >Submit</button>
+                        <p id="validationMessageCheck" style="color:red"></p>
+                        <!--
+                        <input id="saveForm" class="w3-button w3-blue-grey w3-round-large" type="submit"/>
+                        -->
+                    
+                    </div>
+                    <br>
+
+                </div>
+
+                <!-- Notifies user of successful submit, lets you refresh form -->
+                <div id="registrationStatusTab" style="display: none">
+
+                    <div class="w3-container w3-center">
+                        <h3><b>Registration status for: </b><b id="regStatusNameDisplay"></b></h3>
+
+                        <h5><b>Upcoming Events:</b></h5>
+                        <div style="text-align: center;">
+                          <div id="upcomingServicesRegistered" style="text-align: left; display: inline-block;"></div>
+                        </div>
+                        
+                        <br>
+                        <button class="w3-button w3-blue-grey w3-round-large" onclick="updateCheckForm();" >Refresh Status</button>
+                        <br><br>
+                        <button class="w3-button w3-blue-grey w3-round-large" onclick="refreshCheckForm()">New Status Check</button>
+                    </div>
+                    <br>
+
+                    <!-- Switch back to new check registration form -->
+                    <script>
+                        function refreshCheckForm(){
+
+                            // switch tab from submitted to registration form
+                            var currTab, newTab;
+                            currTab = document.getElementById("registrationStatusTab");
+                            newTab = document.getElementById("checkRegistrationTab");
+                            currTab.style.display = "none";
+                            newTab.style.display = "block";
+
+                            // reset status display
+                            document.getElementById("regStatusNameDisplay").innerHTML = "";
+                            document.getElementById("upcomingServicesRegistered").innerHTML = "";
+
+                            // reset all input fields and warnings
+                            document.getElementById("firstnameCheck").value = "";
+                            document.getElementById("firstNameCheckWarning").innerHTML = "";
+                            document.getElementById("lastnameCheck").value = "";
+                            document.getElementById("lastNameCheckWarning").innerHTML = "";
+                            document.getElementById("validationMessageCheck").innerHTML = "";
+                        }
+                    </script>
+
+
+                </div>
+
+
+            </div>
+
+            <!-- Cancel registration tab -->
+            <div id="cancelTab" class="w3-container w3-border reg-tab" style="display:none">
+                <div class="w3-container">
+                  <h2>Cancel Registration</h2>
+                </div>
+
+                <!-- Let user pick which dates to cancel -->
+                <div id="cancelRegTab">
+
+                  <div class="w3-container">
+                        <label>First Name</label>
+                        <input class="w3-input w3-border w3-round" id="firstNameCancel" type="text" required>
+                        <p id="firstNameCancelWarning" style="color:red"></p>
+                        
+                        
+    
+                        <label>Last Name</label>
+                        <input class="w3-input w3-border w3-round" id="lastNameCancel" type="text" required>
+                        <p id="lastNameCancelWarning" style="color:red"></p>
+                        
+                        
+    
+                        <label class="description" for="date">Date(s) to Cancel</label>
+                        
+    
+                        <div class="w3-container">
+    
+                            <!-- UPDATE: Actually I automatically get the next 3 Sundays now -->
+                            <input id="datecancel1" name="date" class="w3-check" type="checkbox" value="" />
+                            <label id='datecancellabel1' class="choice" for="date1"></label>
+                            <br>
+                            <input id="datecancel2" name="date" class="w3-check" type="checkbox" value="" />
+                            <label id='datecancellabel2' class="choice" for="date2"></label>
+                            <br>
+                            <input id="datecancel3" name="date" class="w3-check" type="checkbox" value="" />
+                            <label id='datecancellabel3' class="choice" for="date3"></label>
+
+                            <p id="dateCancelWarning" style="color:red"></p>
+    
+            
+                        </div>
+                        <br>
+
+                        <button class="w3-button w3-blue-grey w3-round-large" onclick="cancelRegistration();" >Cancel</button>
+                        <p id="validationMessageCancel" style="color:red"></p>
+
+                  </div>
+                </div>
+
+              <!-- Notifies user of successful submit, lets you refresh form -->
+              <div id="cancelCompleteTab" style="display: none">
+
+                <div class="w3-container w3-center">
+                    <h3><b>Registration canceled.</b></h3>
+                    <h5>Thank you for helping maintain an accurate headcount.</h5>
+                    <button class="w3-button w3-blue-grey w3-round-large" onclick="refreshCancelForm()">Cancel Another Registration</button>
+                </div>
+                <br>
+
+                <!-- Switch back to new registration form from submitted state -->
+                <script>
+                  function refreshCancelForm(){
+
+                      // switch tab from submitted to registration form
+                      var currTab, newTab;
+                      currTab = document.getElementById("cancelCompleteTab");
+                      newTab = document.getElementById("cancelRegTab");
+                      currTab.style.display = "none";
+                      newTab.style.display = "block";
+
+                      // reset all input fields and warnings
+                      document.getElementById("firstNameCancel").value = "";
+                      document.getElementById("firstNameCancelWarning").innerHTML = "";
+                      document.getElementById("lastNameCancel").value = "";
+                      document.getElementById("lastNameCancelWarning").innerHTML = "";
+                      document.getElementById("datecancel1").checked = false;
+                      document.getElementById("datecancel2").checked = false;
+                      document.getElementById("datecancel3").checked = false;
+                      document.getElementById("dateCancelWarning").innerHTML = "";
+                      document.getElementById("validationMessageCancel").innerHTML = "";
+                  }
+                </script>
+              </div>
+
+            </div>
+
+        </div>
+
+        <!-- Registration tab navigation function -->
+        <script>
+            function openTab(evt, tabName) {
+                var i, x, tablinks;
+                x = document.getElementsByClassName("reg-tab");
+                for (i = 0; i < x.length; i++) {
+                    x[i].style.display = "none";
+                }
+                tablinks = document.getElementsByClassName("tablink");
+                for (i = 0; i < x.length; i++) {
+                    tablinks[i].className = tablinks[i].className.replace(" w3-black", "");
+                }
+                document.getElementById(tabName).style.display = "block";
+                evt.currentTarget.className += " w3-black";
+            }
+        </script>
+
+
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-app.js"></script>
+
+        <!-- TODO: Add SDKs for Firebase products that you want to use
+            https://firebase.google.com/docs/web/setup#available-libraries -->
+        <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-analytics.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.2/firebase-firestore.js"></script>
+
+        <!-- All validation, data handling, and UI -->
+        <script src="registration.js"></script>
+
+
+        
+        
+
+    </body>
+</html>
