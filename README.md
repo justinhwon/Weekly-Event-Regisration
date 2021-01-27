@@ -1,5 +1,5 @@
 # Weekly Event Registration
-Registration system for weekly recurring events, made specifically for contact tracing and COVID-19 liability waivers. Automatically allows registration for the next 3 weekly event dates based on day of the week (Mon/Tues/etc). Validates user submissions and allows users to cancel or check their registration status. Made using a Cloud Firestore (NoSQL) database and JavaScript, with a test project linked below for viewing.
+Registration system for weekly recurring events, made specifically for contact tracing and COVID-19 liability waivers. Automatically calculates and allows registration for the next 3 weekly event dates based on day of the week (Mon/Tues/etc). Validates user submissions and allows users to cancel or check their registration status. Made using a Cloud Firestore (NoSQL) database and JavaScript, with a test project linked below for viewing.
 
 ## Registration Form:
 The registration form, what is linked to the public.  
