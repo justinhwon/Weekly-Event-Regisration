@@ -17,6 +17,12 @@ function getFormattedDateDocument(date) {
     return month + '.' + day + '.' + year;
 }
 
+// format name (remove trailing/leading whitespace and capitalize first letter)
+function formatName(string) {
+    var noWhiteSpaceString = string.replace(/^\s+|\s+$/g, '');
+    return noWhiteSpaceString.charAt(0).toUpperCase() + noWhiteSpaceString.slice(1);
+}
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 var firebaseConfig = {
@@ -133,8 +139,8 @@ function submitRegistrationForm(){
                 // Atomically add a new registrant to the "registrants" array field.
                 serviceDate1.update({
                     registrants: firebase.firestore.FieldValue.arrayUnion({
-                        lastName: lastName.value,
-                        firstName: firstName.value
+                        lastName: formatName(lastName.value),
+                        firstName: formatName(firstName.value)
                     })
                 });
             } else {
@@ -143,8 +149,8 @@ function submitRegistrationForm(){
                 let docData = {
                     date: timestampS1,
                     registrants: [{
-                        lastName: lastName.value,
-                        firstName: firstName.value
+                        lastName: formatName(lastName.value),
+                        firstName: formatName(firstName.value)
                     }]
                 };
                 serviceDate1.set(docData);
@@ -165,8 +171,8 @@ function submitRegistrationForm(){
                 // Atomically add a new registrant to the "registrants" array field.
                 serviceDate2.update({
                     registrants: firebase.firestore.FieldValue.arrayUnion({
-                        lastName: lastName.value,
-                        firstName: firstName.value
+                        lastName: formatName(lastName.value),
+                        firstName: formatName(firstName.value)
                     })
                 });
             } else {
@@ -175,8 +181,8 @@ function submitRegistrationForm(){
                 let docData = {
                     date: timestampS2,
                     registrants: [{
-                        lastName: lastName.value,
-                        firstName: firstName.value
+                        lastName: formatName(lastName.value),
+                        firstName: formatName(firstName.value)
                     }]
                 };
                 serviceDate2.set(docData);
@@ -197,8 +203,8 @@ function submitRegistrationForm(){
                 // Atomically add a new registrant to the "registrants" array field.
                 serviceDate3.update({
                     registrants: firebase.firestore.FieldValue.arrayUnion({
-                        lastName: lastName.value,
-                        firstName: firstName.value
+                        lastName: formatName(lastName.value),
+                        firstName: formatName(firstName.value)
                     })
                 });
             } else {
@@ -207,8 +213,8 @@ function submitRegistrationForm(){
                 let docData = {
                     date: timestampS3,
                     registrants: [{
-                        lastName: lastName.value,
-                        firstName: firstName.value
+                        lastName: formatName(lastName.value),
+                        firstName: formatName(firstName.value)
                     }]
                 };
                 serviceDate3.set(docData);
@@ -245,9 +251,9 @@ function submitCheckForm(){
     }
 
     // add name to status header
-    document.getElementById("regStatusNameDisplay").innerHTML+= firstNameCheck.value;
+    document.getElementById("regStatusNameDisplay").innerHTML+= formatName(firstNameCheck.value);
     document.getElementById("regStatusNameDisplay").innerHTML+= " ";
-    document.getElementById("regStatusNameDisplay").innerHTML+= lastNameCheck.value;
+    document.getElementById("regStatusNameDisplay").innerHTML+= formatName(lastNameCheck.value);
 
     // UNNEEDED: create registrant object to check for existence in registrations
     var checkUser = {firstName: firstNameCheck.value, lastName: lastNameCheck.value};
@@ -267,7 +273,7 @@ function submitCheckForm(){
 
             // if name registered for specific date, show 'yes'
             // if not registered, show 'no'
-            if (regList.filter(function(e) { return e.firstName == firstNameCheck.value && e.lastName == lastNameCheck.value; }).length > 0) {
+            if (regList.filter(function(e) { return e.firstName == formatName(firstNameCheck.value) && e.lastName == formatName(lastNameCheck.value); }).length > 0) {
                 document.getElementById("upcomingServicesRegistered").innerHTML += sunday1;
                 document.getElementById("upcomingServicesRegistered").innerHTML += ': Registered!<br>';
             }
@@ -290,7 +296,7 @@ function submitCheckForm(){
 
             // if name registered for specific date, show 'yes'
             // if not registered, show 'no'
-            if (regList.filter(function(e) { return e.firstName == firstNameCheck.value && e.lastName == lastNameCheck.value; }).length > 0) {
+            if (regList.filter(function(e) { return e.firstName == formatName(firstNameCheck.value) && e.lastName == formatName(lastNameCheck.value); }).length > 0) {
                 document.getElementById("upcomingServicesRegistered").innerHTML += sunday2;
                 document.getElementById("upcomingServicesRegistered").innerHTML += ': Registered!<br>';
             }
@@ -313,7 +319,7 @@ function submitCheckForm(){
 
             // if name registered for specific date, show 'yes'
             // if not registered, show 'no'
-            if (regList.filter(function(e) { return e.firstName == firstNameCheck.value && e.lastName == lastNameCheck.value; }).length > 0) {
+            if (regList.filter(function(e) { return e.firstName == formatName(firstNameCheck.value) && e.lastName == formatName(lastNameCheck.value); }).length > 0) {
                 document.getElementById("upcomingServicesRegistered").innerHTML += sunday3;
                 document.getElementById("upcomingServicesRegistered").innerHTML += ': Registered!<br>';
             }
@@ -374,8 +380,8 @@ function cancelRegistration(){
             // if service date exists, remove person from list of registrants.
             serviceDate1.update({
                 registrants: firebase.firestore.FieldValue.arrayRemove({
-                    lastName: lastName.value,
-                    firstName: firstName.value
+                    lastName: formatName(lastName.value),
+                    firstName: formatName(firstName.value)
                 })
             });
         } else {
@@ -396,8 +402,8 @@ function cancelRegistration(){
             // if service date exists, remove person from list of registrants.
             serviceDate2.update({
                 registrants: firebase.firestore.FieldValue.arrayRemove({
-                    lastName: lastName.value,
-                    firstName: firstName.value
+                    lastName: formatName(lastName.value),
+                    firstName: formatName(firstName.value)
                 })
             });
         } else {
@@ -418,8 +424,8 @@ function cancelRegistration(){
             // if service date exists, remove person from list of registrants.
             serviceDate3.update({
                 registrants: firebase.firestore.FieldValue.arrayRemove({
-                    lastName: lastName.value,
-                    firstName: firstName.value
+                    lastName: formatName(lastName.value),
+                    firstName: formatName(firstName.value)
                 })
             });
         } else {
