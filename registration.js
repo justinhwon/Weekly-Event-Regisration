@@ -19,8 +19,22 @@ function getFormattedDateDocument(date) {
 
 // format name (remove trailing/leading whitespace and capitalize first letter)
 function formatName(string) {
+    // remove trailing/leading whitespace
     var noWhiteSpaceString = string.replace(/^\s+|\s+$/g, '');
-    return noWhiteSpaceString.charAt(0).toUpperCase() + noWhiteSpaceString.slice(1);
+    // uncapitalize all letters
+    var uncapitalizedString = noWhiteSpaceString.toLowerCase();
+    // make all spaces single
+    uncapitalizedString = uncapitalizedString.replace(/\s\s+/g, ' ');
+    // capitalize first letter of each separate word
+    const words = uncapitalizedString.split(' ');
+    console.log("split string: ", words)
+    for (let i = 0; i < words.length; i++) {
+        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+    }
+    // recombine words into single name
+    var formattedString = words.join(" ");
+    console.log("formatted string: ", formattedString);
+    return formattedString;
 }
 
 // Your web app's Firebase configuration
