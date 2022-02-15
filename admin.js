@@ -85,7 +85,7 @@ docRef.get().then(function(doc) {
         console.log("Document data:", doc.data());
         // get current list of registrants
         let regObjList = doc.data()['registrants'].sort((a, b) => (a.firstName > b.firstName) ? 1 : -1);
-        let regList = regObjList.map(x => x.firstName + " " + x.lastName);
+        let regList = regObjList.map(x => x.firstName + " " + x.lastName + ", email: " + checkEmailEmpty(x.email));
         // display current number of registrants
         document.getElementById("numRegistered").innerHTML = regList.length;
         // display current list of registrants
@@ -110,6 +110,15 @@ document.getElementById("option2").value = sundayDoc2;
 document.getElementById("option2").innerHTML = sunday2;
 document.getElementById("option3").value = sundayDoc3;
 document.getElementById("option3").innerHTML = sunday3;
+
+
+// checks if the email variable is empty and reassigns to n/a
+function checkEmailEmpty(email){
+    if(email){
+        return email;
+    }
+    return "n/a";
+}
 
 
 // get list of registrants for different date

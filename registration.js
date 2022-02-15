@@ -121,6 +121,13 @@ function submitRegistrationForm(){
         document.getElementById("validationMessage").innerHTML = "Please fill out all the fields.";
         return;
     }
+    // check if valid email
+    var email = document.getElementById("email");
+    if (!email.checkValidity()) {
+        document.getElementById("emailWarning").innerHTML = "Please enter your email.";
+        document.getElementById("validationMessage").innerHTML = "Please fill out all the fields.";
+        return;
+    }
     // see which checkboxes are checked
     var checkbox1 = document.getElementById("date1");
     var checkbox2 = document.getElementById("date2");
@@ -144,7 +151,6 @@ function submitRegistrationForm(){
 
     // for date 1
     if (checkbox1.checked){
-
         const serviceDate1 = db.collection("registrations").doc(sundayDoc1);
 
         serviceDate1.get().then(function(doc) {
@@ -154,7 +160,8 @@ function submitRegistrationForm(){
                 serviceDate1.update({
                     registrants: firebase.firestore.FieldValue.arrayUnion({
                         lastName: formatName(lastName.value),
-                        firstName: formatName(firstName.value)
+                        firstName: formatName(firstName.value),
+                        email: formatName(email.value)
                     })
                 });
             } else {
@@ -164,7 +171,8 @@ function submitRegistrationForm(){
                     date: timestampS1,
                     registrants: [{
                         lastName: formatName(lastName.value),
-                        firstName: formatName(firstName.value)
+                        firstName: formatName(firstName.value),
+                        email: formatName(email.value)
                     }]
                 };
                 serviceDate1.set(docData);
@@ -186,7 +194,8 @@ function submitRegistrationForm(){
                 serviceDate2.update({
                     registrants: firebase.firestore.FieldValue.arrayUnion({
                         lastName: formatName(lastName.value),
-                        firstName: formatName(firstName.value)
+                        firstName: formatName(firstName.value),
+                        email: formatName(email.value)
                     })
                 });
             } else {
@@ -196,7 +205,8 @@ function submitRegistrationForm(){
                     date: timestampS2,
                     registrants: [{
                         lastName: formatName(lastName.value),
-                        firstName: formatName(firstName.value)
+                        firstName: formatName(firstName.value),
+                        email: formatName(email.value)
                     }]
                 };
                 serviceDate2.set(docData);
@@ -218,7 +228,8 @@ function submitRegistrationForm(){
                 serviceDate3.update({
                     registrants: firebase.firestore.FieldValue.arrayUnion({
                         lastName: formatName(lastName.value),
-                        firstName: formatName(firstName.value)
+                        firstName: formatName(firstName.value),
+                        email: formatName(email.value)
                     })
                 });
             } else {
@@ -228,7 +239,8 @@ function submitRegistrationForm(){
                     date: timestampS3,
                     registrants: [{
                         lastName: formatName(lastName.value),
-                        firstName: formatName(firstName.value)
+                        firstName: formatName(firstName.value),
+                        email: formatName(email.value)
                     }]
                 };
                 serviceDate3.set(docData);
